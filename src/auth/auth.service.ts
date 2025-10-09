@@ -32,5 +32,9 @@ export class AuthService {
             throw new UnauthorizedException('Credenciales Inválidas');
         }
     }
-
+    async hashearpassword (password:string){
+        const salt = await bcrypt.genSalt(12);
+        const hashed_pasword =await bcrypt.hash(password,salt);
+        return hashed_pasword;
+    }
 }
