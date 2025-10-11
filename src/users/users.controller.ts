@@ -23,11 +23,13 @@ export class UsersController {
   }
 
   @Get(':id')
+  @UseGuards (JwtAuthGuard)
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(+id);
   }
 
   @Patch(':id')
+  @UseGuards (JwtAuthGuard)
   async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     const usuarioactualizado: any ={...updateUserDto};
     if(updateUserDto.password){
@@ -37,6 +39,7 @@ export class UsersController {
   }
 
   @Delete(':id')
+  @UseGuards (JwtAuthGuard)
   remove(@Param('id') id: string) {
     return this.usersService.remove(+id);
   }
